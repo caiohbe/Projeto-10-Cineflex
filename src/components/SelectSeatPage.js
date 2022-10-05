@@ -1,5 +1,11 @@
+import Footer from "./Footer"; 
+
 export default function SelectSeatPage() {
     return (
-        <div>SelectSeatPage</div>
+        <>
+            <div>SelectSeatPage</div>
+            <Footer />
+        </>
+        
     )
 }

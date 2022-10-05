@@ -1,5 +1,10 @@
+import Footer from "./Footer"; 
+
 export default function SelectSessionPage() {
     return (
-        <div>SelectSessionPage</div>
+        <>
+            <div>SelectSessionPage</div>
+            <Footer />
+        </>
     )
 }

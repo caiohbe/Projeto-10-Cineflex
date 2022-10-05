@@ -4,7 +4,6 @@ import '../style.css'
 import SelectMoviePage from "./SelectMoviePage";
 import SelectSessionPage from "./SelectSessionPage";
 import SelectSeatPage from "./SelectSeatPage";
-import Footer from "./Footer"; 
 
 
  export default function App() {
@@ -12,10 +11,9 @@ import Footer from "./Footer";
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<SelectMoviePage />}/>
-                <Route path="/sessoes" element={<SelectMoviePage />}/>
-                <Route path="/assentos" element={<SelectMoviePage />}/>
+                <Route path="/sessoes" element={<SelectSessionPage />}/>
+                <Route path="/assentos" element={<SelectSeatPage />}/>
             </Routes>
-            <Footer />
         </BrowserRouter>
     )
  }
