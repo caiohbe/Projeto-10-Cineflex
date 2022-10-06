@@ -5,6 +5,7 @@ import SelectMoviePage from "./SelectMoviePage";
 import SelectSessionPage from "./SelectSessionPage";
 import SelectSeatPage from "./SelectSeatPage";
 import Header from "./Header";
+import Sucess from "./Sucess";
 import axios from 'axios';
 
 
@@ -23,6 +24,7 @@ import axios from 'axios';
                 <Route path="/" element={<SelectMoviePage />}/>
                 <Route path="/sessoes" element={<SelectSessionPage />}/>
                 <Route path="/assentos" element={<SelectSeatPage />}/>
+                <Route path='/sucesso' element={<Sucess />}/>
             </Routes>
         </BrowserRouter>
     )
