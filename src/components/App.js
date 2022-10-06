@@ -6,17 +6,9 @@ import SelectSessionPage from "./SelectSessionPage";
 import SelectSeatPage from "./SelectSeatPage";
 import Header from "./Header";
 import Sucess from "./Sucess";
-import axios from 'axios';
 
 
  export default function App() {
-    axios
-    .get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
-    .then((requisition) => {
-        console.log(requisition.data)
-    }) 
-
-
     return (
         <BrowserRouter>
             <Header />
