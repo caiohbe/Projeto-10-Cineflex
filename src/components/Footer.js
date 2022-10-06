@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-export default function Footer() {
+export default function Footer({banner, title}) {
     return (
         <Bottom>
             <MovieBanner>
-                <img src="https://cdn.discordapp.com/attachments/735305761269481502/1027356663755313172/image_3.png" alt="" />
+                {banner}
             </MovieBanner>
-            <p>Enola Holmes</p>
+            <p>{title}</p>
         </Bottom>
     )
 }

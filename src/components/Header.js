@@ -1,8 +1,12 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export default function Header() {
     return (
-        <Top>CINEFLIX</Top>
+        <Link to={'/'}>
+            <Top>CINEFLIX</Top>
+        </Link>
+        
     )
 }
 
@@ -16,4 +20,5 @@ const Top = styled.div`
     color: #E8833A;
     font-size: 34px;
     font-weight: 700;
+    text-decoration: underline;
 `

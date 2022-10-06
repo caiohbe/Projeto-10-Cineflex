@@ -1,10 +1,13 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export default function MovieBanner({movie}) {
+export default function MovieBanner({ movie }) {
     return (
-        <Movie >
-            <img src={movie.posterURL} alt="" />
-        </Movie>
+        <Link to={`/sessoes/${movie.id}`} key={movie.id}>
+            <Movie >
+                <img src={movie.posterURL} alt={movie.title} />
+            </Movie>
+        </Link>
     )
 }
 

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
 import axios from 'axios';
 import { useEffect, useState } from "react";
 import loading from '../assets/loading.gif'
@@ -7,20 +6,18 @@ import MovieBanner from './MovieBanner'
 
 export default function SelectMoviePage() {
     const [moviesArray, setMoviesArray] = useState(<img className="loading" src={loading} alt='loading' />)
-
+    
     useEffect(() => {
         axios
-            .get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
-            .then((movies) => {
-                console.log(movies.data)
-                setMoviesArray(movies.data.map((movie) => {
-                    return (
-                        <Link key={movie.id}>
-                            <MovieBanner movie={movie}/>
-                        </Link>
-                    )
-                }))
-            })
+        .get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
+        .then((movies) => {
+            console.log(movies.data)
+            setMoviesArray(movies.data.map((movie) => {
+                return (
+                    <MovieBanner key={movie.id} movie={movie}/>
+                )
+            }))
+        })
     }, [])
 
     return (
@@ -56,4 +53,3 @@ const Select = styled.div`
     font-size: 24px;
     color: #293845;
 `
-
