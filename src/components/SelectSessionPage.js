@@ -9,7 +9,7 @@ export default function SelectSessionPage() {
     const {idFilme} = useParams()
     const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
     const [title, setTitle] = useState('')
-    const [showtimes, setShowtimes] = useState(<img src={loading} alt='banner' />)
+    const [showtimes, setShowtimes] = useState(<img className="loading" src={loading} alt='banner' />)
 
     useEffect(() => {
         axios
@@ -48,7 +48,7 @@ export default function SelectSessionPage() {
 
 const Content = styled.div`
     margin-bottom: 130px;
-    img {
+    .loading {
         width: 50%;
         display: flex;
         margin: auto;
