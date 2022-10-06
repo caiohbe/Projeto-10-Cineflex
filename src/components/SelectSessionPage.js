@@ -9,7 +9,7 @@ export default function SelectSessionPage() {
     const {idFilme} = useParams()
     const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
     const [title, setTitle] = useState('')
-    const [showtimes, setShowtimes] = useState([])
+    const [showtimes, setShowtimes] = useState(<img src={loading} alt='banner' />)
 
     useEffect(() => {
         axios
@@ -24,7 +24,7 @@ export default function SelectSessionPage() {
                         <Hour key={e.id}>{e.name}</Hour>
                     )
                 })
-                
+
                 return (
                     <Session key={e.id}>
                         <p>{e.weekday} - {e.date}</p>
@@ -41,22 +41,6 @@ export default function SelectSessionPage() {
         <Content>
             <Select>Selecione o Horário</Select>
             {showtimes}
-            {/* <Session>
-                <p>Quinta-feira - 24/06/2021</p>
-                <Hours>
-                    <Hour>15:20</Hour>
-                    <Hour>15:20</Hour>
-                </Hours>
-            </Session>
-
-            <Session>
-                <p>Quinta-feira - 24/06/2021</p>
-                <Hours>
-                    <Hour>15:20</Hour>
-                    <Hour>15:20</Hour>
-                </Hours>
-            </Session> */}
-
             <Footer banner={banner} title={title}/>
         </Content>
     )
@@ -64,6 +48,11 @@ export default function SelectSessionPage() {
 
 const Content = styled.div`
     margin-bottom: 130px;
+    img {
+        width: 50%;
+        display: flex;
+        margin: auto;
+    }
 `
 
 const Select = styled.div`
