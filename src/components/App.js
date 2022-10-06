@@ -14,8 +14,8 @@ import Sucess from "./Sucess";
             <Header />
             <Routes>
                 <Route path="/" element={<SelectMoviePage />}/>
-                <Route path="/sessoes" element={<SelectSessionPage />}/>
-                <Route path="/assentos" element={<SelectSeatPage />}/>
+                <Route path="/sessoess/:idFilme" element={<SelectSessionPage />}/>
+                <Route path="/assentos/:idSessao" element={<SelectSeatPage />}/>
                 <Route path='/sucesso' element={<Sucess />}/>
             </Routes>
         </BrowserRouter>

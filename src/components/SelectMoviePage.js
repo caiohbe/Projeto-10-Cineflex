@@ -3,26 +3,25 @@ import { Link } from "react-router-dom"
 import axios from 'axios';
 import { useEffect, useState } from "react";
 import loading from '../assets/loading.gif'
-
-let listafilmes
-
+import MovieBanner from './MovieBanner'
 
 export default function SelectMoviePage() {
-    const [moviesArray, setMoviesArray] = useState(<img src={loading} alt='loading' />)
+    const [moviesArray, setMoviesArray] = useState(<img className="loading" src={loading} alt='loading' />)
+
     useEffect(() => {
         axios
             .get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
             .then((movies) => {
                 console.log(movies.data)
-                listafilmes = movies.data.map((movie) => {
+                setMoviesArray(movies.data.map((movie) => {
                     return (
-                        <Movie key={movie.id}><img src={movie.posterURL} alt="" /></Movie>
+                        <Link key={movie.id}>
+                            <MovieBanner movie={movie}/>
+                        </Link>
                     )
-                })
-                setMoviesArray(listafilmes)
+                }))
             })
     }, [])
-
 
     return (
         <>
@@ -34,6 +33,20 @@ export default function SelectMoviePage() {
     )
 }
 
+const Movies = styled.div`
+    .loading {
+        width: 50%;
+        display: flex;
+        margin: auto;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: auto;
+    justify-content: space-around;
+`
+
+
 const Select = styled.div`
     width: 100%;
     height: 110px;
@@ -44,28 +57,3 @@ const Select = styled.div`
     color: #293845;
 `
 
-const Movies = styled.div`
-    img { 
-        width: 50%;
-        display: flex;
-        margin: auto;
-    }
-    display: flex;
-    flex-wrap: wrap;
-`
-
-const Movie = styled.div`
-    height: 209px;
-    width: 145px;
-    box-shadow: 0px 2px 4px 2px #0000001A;
-    margin-left: 28px;
-    margin-bottom: 11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-        width: 129px;
-        height: 193px;
-    }
-`
