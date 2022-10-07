@@ -1,6 +1,6 @@
 import Footer from "./Footer"; 
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import loading from "../assets/loading.gif"
@@ -21,7 +21,9 @@ export default function SelectSessionPage() {
             setShowtimes(movie.data.days.map((e) => { 
                 const hoursArray = e.showtimes.map((e) => {
                     return (
-                        <Hour key={e.id}>{e.name}</Hour>
+                        <Link to={`/assentos/${e.id}`} key={e.id}>
+                            <Hour>{e.name}</Hour>
+                        </Link>
                     )
                 })
 

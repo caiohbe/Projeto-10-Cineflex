@@ -1,15 +1,23 @@
 import styled from "styled-components"
 
-export default function Footer({banner, title}) {
+export default function Footer({banner, title, sessionTime}) {
     return (
         <Bottom>
             <MovieBanner>
                 {banner}
             </MovieBanner>
-            <p>{title}</p>
+            <FooterText>
+                <p>{title}</p> <br />
+                <p>{sessionTime}</p>
+            </FooterText>
         </Bottom>
     )
 }
+
+const FooterText = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 const Bottom = styled.div`
     height: 117px;

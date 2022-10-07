@@ -1,41 +1,47 @@
 import Footer from "./Footer"; 
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import loading from '../assets/loading.gif'
 
 export default function SelectSeatPage() {
+    const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
+    const [title, setTitle] = useState('')
+    const [sessionTime, setSessionTime] = useState('')
+    const {idSessao} = useParams()
+    const [seatsArray, setSeatsArray] = useState([])
+
+    useEffect(() => {
+        axios
+        .get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
+        .then((session) => {
+            console.log(session)
+            setBanner(<img src={session.data.movie.posterURL} alt='poster'/>)
+            setTitle(session.data.movie.title)
+            setSessionTime(`${session.data.day.weekday} - ${session.data.name}`)
+            console.log(session.data.seats)
+
+            setSeatsArray(session.data.seats.map((s) => {
+                return (
+                    <Seat key={s.id} className={s.isAvailable ? 'available' : 'unavailable'}>{s.name}</Seat>
+                )
+            }))
+        })
+    }, [])
+
+
     return (
-        <>
+        <SelectSeat>
             <Select>Selecione o(s) acento(s)</Select>
-            <Rows>
-                <Row>
-                    <Seat></Seat> 
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                </Row>
-                <Row>
-                    <Seat></Seat> 
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                    <Seat></Seat>
-                </Row>
-            </Rows>
+            <Seats>
+                    {seatsArray}
+            </Seats>
 
             <Info>
-                <Selected></Selected>
-                <Unavailable></Unavailable>
-                <Available></Available>
+                <Seat className="selected"></Seat >
+                <Seat className="available"></Seat >
+                <Seat className="unavailable"></Seat >
             </Info>
             <Info>
                 <p>Selecionado</p>
@@ -52,11 +58,28 @@ export default function SelectSeatPage() {
 
             <Button>Reservar assento(s)</Button>
 
-            <Footer />
-        </>
+            <Footer banner={banner} title={title} sessionTime={sessionTime}/>
+        </SelectSeat>
         
     )
 }
+
+const SelectSeat = styled.div`
+    .selected {
+        background-color: #1AAE9E;
+        border: 1px solid #0E7D71
+    }
+
+    .available {
+        background-color: #C3CFD9;
+        border: 1px solid #7B8B99
+    }
+
+    .unavailable {
+        background-color: #FBE192;
+        border: 1px solid #F7C52B
+    }
+`
 
 const Button = styled.button`
     width: 225px;
@@ -101,26 +124,25 @@ const Inputs = styled.div`
     }
 `
 
-const Rows = styled.div`
+const Seats = styled.div`
     display:flex;
-    align-items: center;
-    flex-direction: column;
-`
-
-const Row = styled.div`
-    width: 88%;
-    display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    flex-shrink: 0;
-    margin-bottom: 18px;
+    width: 88%;
+    margin: auto;
+    justify-content: center;
 `
 
 const Seat = styled.div`
+    font-size: 73%;
+    margin: 1vh 0.7vw;
     width: 7vw;
     height: 7vw;
     background-color: red;
     border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000
 `   
 
 const Select = styled.div`
@@ -142,28 +164,3 @@ const Info = styled.div`
         font-weight: 400;
     }
 `
-
-const Selected = styled.div`
-    width: 7vw;
-    height: 7vw;
-    background-color: #1AAE9E;
-    border: 1px solid #0E7D71;
-    border-radius: 100px;
-`
-
-const Unavailable = styled.div`
-    width: 7vw;
-    height: 7vw;
-    background-color: #C3CFD9;
-    border: 1px solid #7B8B99;
-    border-radius: 100px;
-
-`
-const Available = styled.div`
-    width: 7vw;
-    height: 7vw;
-    background-color: #FBE192;
-    border: 1px solid #F7C52B;
-    border-radius: 100px;
-`
-
