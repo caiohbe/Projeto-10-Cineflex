@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export default function Sucess() {
+export default function Sucess({name, cpf, title , sessionDay, sessionHour, seatNumbers, setSeatNumbers}) {
     return (
         <>
             <Notification>
@@ -10,23 +11,29 @@ export default function Sucess() {
             <Status>
                 <h2>Filme e sessão</h2>
                 <h3>
-                    Enola Holmes <br />
-                    24/06/2021 15:00
+                    {title} <br />
+                    {sessionDay} {sessionHour}
                 </h3>
 
                 <h2>Ingressos</h2>
                 <h3>
-                    Assento 15 <br />
-                    Assento 16
+                    {seatNumbers.map((n) => {
+                        return (
+                            <p key={n}>Assento {n}</p>
+                        )
+                    })}
                 </h3>
 
                 <h2>Comprador</h2>
                 <h3>
-                    Nome: João da Silva Sauro <br />
-                    CPF: 123.456.789-10
+                    Nome: {name} <br />
+                    CPF: {cpf}
                 </h3>
             </Status>
-            <Button>Voltar pra Home</Button>
+
+            <Link to={'/'}>
+                <Button onClick={() => setSeatNumbers([])}>Voltar pra Home</Button>
+            </Link>
         </>
     )
 } 
@@ -44,6 +51,7 @@ const Button = styled.button`
     color: #FFFFFF;
     font-size: 18px;
     margin-top: 55px;
+    text-decoration: underline #E8833A;
 
 `
 

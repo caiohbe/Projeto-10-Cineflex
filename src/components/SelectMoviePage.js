@@ -11,7 +11,6 @@ export default function SelectMoviePage() {
         axios
         .get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         .then((movies) => {
-            console.log(movies.data)
             setMoviesArray(movies.data.map((movie) => {
                 return (
                     <MovieBanner key={movie.id} movie={movie}/>

@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import loading from '../assets/loading.gif'
+import FinishOrder from "./FinishOrder";
 
 
-
-export default function SelectSeatPage() {
+export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers, setSeatNumbers}) {
     const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
     const [title, setTitle] = useState('')
     const [sessionTime, setSessionTime] = useState('')
+
     const {idSessao} = useParams()
+
     const [seatsArray, setSeatsArray] = useState([])
     const [selectedSeats, setSelectedSeats] = useState([])
 
@@ -27,14 +29,14 @@ export default function SelectSeatPage() {
 
                 return (
                     <Seat
-                        onClick={() => {selectSeat(s.id, s.isAvailable)}}
+                        onClick={() => {selectSeat(s.id, s.isAvailable, s.name)}}
                         key={s.id} 
                         className={!s.isAvailable ? 'unavailable' : selectedSeats.includes(s.id) ? 'selected' :'available'}>{s.name}
                     </Seat>
                 )
             }))
 
-            function selectSeat(id, isAvailable) {
+            function selectSeat(id, isAvailable, name) {
                 if (selectedSeats.includes(id)) {
 
                     setSelectedSeats(selectedSeats.filter((s) => {
@@ -45,6 +47,7 @@ export default function SelectSeatPage() {
 
                 } else if (!selectedSeats.includes(id) && isAvailable) {
                     setSelectedSeats([...selectedSeats, id])
+                    setSeatNumbers([...seatNumbers, name])
                     console.log(selectedSeats)
                 }
             }
@@ -81,7 +84,7 @@ export default function SelectSeatPage() {
                 <input placeholder='Digite seu  CPF...' type={'text'}></input>
             </Inputs>
 
-            <Button>Reservar assento(s)</Button>
+            <FinishOrder ids={selectedSeats} name={name} cpf={cpf}/>
 
             <Footer banner={banner} title={title} sessionTime={sessionTime}/>
         </SelectSeat>
@@ -104,22 +107,6 @@ const SelectSeat = styled.div`
         background-color: #FBE192;
         border: 1px solid #F7C52B
     }
-`
-
-const Button = styled.button`
-    width: 225px;
-    height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    background-color: #E8833A;
-    border: 0px;
-    border-radius: 3px;
-    color: #FFFFFF;
-    font-size: 18px;
-    margin-top: 55px;
-
 `
 
 const Inputs = styled.div`

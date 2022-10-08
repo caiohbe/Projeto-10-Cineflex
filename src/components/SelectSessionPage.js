@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import loading from "../assets/loading.gif"
 
-export default function SelectSessionPage() {
+export default function SelectSessionPage({title, setTitle, setSessionHour, setSessionDay}) {
     const {idFilme} = useParams()
     const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
-    const [title, setTitle] = useState('')
-    const [showtimes, setShowtimes] = useState(<img className="loading" src={loading} alt='banner' />)
+    const [showtimes, setShowtimes] = useState(<img className="loading" src={loading} alt='Sessions' />)
 
     useEffect(() => {
         axios
@@ -19,14 +18,16 @@ export default function SelectSessionPage() {
             setTitle(movie.data.title)
 
             setShowtimes(movie.data.days.map((e) => { 
-                const hoursArray = e.showtimes.map((e) => {
+                const hoursArray = e.showtimes.map((i) => {
                     return (
-                        <Link to={`/assentos/${e.id}`} key={e.id}>
-                            <Hour>{e.name}</Hour>
+                        <Link to={`/assentos/${i.id}`} key={i.id}>
+                            <Hour onClick={() => {
+                                setSessionDay(e.date)
+                                setSessionHour(i.name)            
+                            }}>{i.name}</Hour>
                         </Link>
                     )
                 })
-
                 return (
                     <Session key={e.id}>
                         <p>{e.weekday} - {e.date}</p>
