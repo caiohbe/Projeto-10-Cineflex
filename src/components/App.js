@@ -52,6 +52,8 @@ import { useState } from "react";
                 sessionHour={sessionHour}
                 seatNumbers={seatNumbers}
                 setSeatNumbers={setSeatNumbers}
+                name={name}
+                cpf={cpf}
                 />}/>
             </Routes>
         </BrowserRouter>

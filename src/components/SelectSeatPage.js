@@ -79,9 +79,9 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
 
             <Inputs>
                 <p>Nome do comprador: </p>
-                <input placeholder='Digite seu nome...' type={'text'}></input>
+                <input onChange={(e) => setName(e.target.value)} placeholder='Digite seu nome...' type={'text'}></input>
                 <p>CPF do comprador: </p>
-                <input placeholder='Digite seu  CPF...' type={'text'}></input>
+                <input onChange={(e) => setCpf(e.target.value)} placeholder='Digite seu  CPF...' type={'text'}></input>
             </Inputs>
 
             <FinishOrder ids={selectedSeats} name={name} cpf={cpf}/>
