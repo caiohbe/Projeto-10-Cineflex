@@ -87,6 +87,7 @@ const Hour = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: 9px;
+    text-decoration: underline #E8833A;
 `
 
 const Hours = styled.div`

@@ -5,31 +5,56 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import loading from '../assets/loading.gif'
 
+
+
 export default function SelectSeatPage() {
     const [banner, setBanner] =  useState(<img src={loading} alt='banner' />)
     const [title, setTitle] = useState('')
     const [sessionTime, setSessionTime] = useState('')
     const {idSessao} = useParams()
     const [seatsArray, setSeatsArray] = useState([])
+    const [selectedSeats, setSelectedSeats] = useState([])
 
     useEffect(() => {
         axios
         .get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
         .then((session) => {
-            console.log(session)
             setBanner(<img src={session.data.movie.posterURL} alt='poster'/>)
             setTitle(session.data.movie.title)
             setSessionTime(`${session.data.day.weekday} - ${session.data.name}`)
-            console.log(session.data.seats)
 
             setSeatsArray(session.data.seats.map((s) => {
+
                 return (
-                    <Seat key={s.id} className={s.isAvailable ? 'available' : 'unavailable'}>{s.name}</Seat>
+                    <Seat
+                        onClick={() => {selectSeat(s.id, s.isAvailable)}}
+                        key={s.id} 
+                        className={!s.isAvailable ? 'unavailable' : selectedSeats.includes(s.id) ? 'selected' :'available'}>{s.name}
+                    </Seat>
                 )
             }))
-        })
-    }, [])
 
+            function selectSeat(id, isAvailable) {
+                if (selectedSeats.includes(id)) {
+
+                    setSelectedSeats(selectedSeats.filter((s) => {
+                        if(s !== id) {
+                            return s
+                        }
+                    }))
+
+                } else if (!selectedSeats.includes(id) && isAvailable) {
+                    setSelectedSeats([...selectedSeats, id])
+                    console.log(selectedSeats)
+                }
+            }
+
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })  
+
+    }, [selectedSeats])
 
     return (
         <SelectSeat>
@@ -137,7 +162,6 @@ const Seat = styled.div`
     margin: 1vh 0.7vw;
     width: 7vw;
     height: 7vw;
-    background-color: red;
     border-radius: 100%;
     display: flex;
     justify-content: center;

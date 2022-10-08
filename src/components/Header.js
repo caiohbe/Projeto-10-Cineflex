@@ -20,5 +20,5 @@ const Top = styled.div`
     color: #E8833A;
     font-size: 34px;
     font-weight: 700;
-    text-decoration: underline;
+    text-decoration: underline #C3CFD9;
 `
