@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export default function Header({setSeatNumbers}) {
     return (
         <Link to={'/'}>
-            <Top onClick={() => setSeatNumbers([])}>CINEFLIX</Top>
+            <Top onClick={() => setSeatNumbers([])}>CINEFLEX</Top>
         </Link>
         
     )
