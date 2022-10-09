@@ -37,7 +37,9 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
             }))
 
             function selectSeat(id, isAvailable, name) {
-                if (selectedSeats.includes(id)) {
+                if (!isAvailable) {
+                    alert('Esse assento não está disponível')
+                } else if (selectedSeats.includes(id)) {
 
                     setSelectedSeats(selectedSeats.filter((s) => {
                         if(s !== id) {
