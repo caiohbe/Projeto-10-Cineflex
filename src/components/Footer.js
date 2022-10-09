@@ -7,8 +7,8 @@ export default function Footer({banner, title, sessionTime}) {
                 {banner}
             </MovieBanner>
             <FooterText>
-                <p>{title}</p> <br />
-                <p>{sessionTime}</p>
+                <p data-identifier="movie-img-preview">{title}</p> <br />
+                <p data-identifier="movie-and-session-infos-preview">{sessionTime}</p>
             </FooterText>
         </Bottom>
     )

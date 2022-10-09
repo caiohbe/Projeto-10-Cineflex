@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export default function FinishOrder({ids, name, cpf}) {
     return (
         <Link to='/sucesso'>
-            <Button onClick={() => order(ids, name, cpf)}>Reservar assento(s)</Button>
+            <Button data-identifier="reservation-btn" onClick={() => order(ids, name, cpf)}>Reservar assento(s)</Button>
         </Link>
     )
 

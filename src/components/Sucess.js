@@ -10,13 +10,13 @@ export default function Sucess({name, cpf, title , sessionDay, sessionHour, seat
 
             <Status>
                 <h2>Filme e sessão</h2>
-                <h3>
+                <h3 data-identifier="movie-session-infos-reserve-finished">
                     {title} <br />
                     {sessionDay} {sessionHour}
                 </h3>
 
                 <h2>Ingressos</h2>
-                <h3>
+                <h3 data-identifier="seat-infos-reserve-finished">
                     {seatNumbers.map((n) => {
                         return (
                             <p key={n}>Assento {n}</p>
@@ -25,14 +25,14 @@ export default function Sucess({name, cpf, title , sessionDay, sessionHour, seat
                 </h3>
 
                 <h2>Comprador</h2>
-                <h3>
+                <h3 data-identifier="buyer-infos-reserve-finished">
                     Nome: {name} <br />
                     CPF: {cpf}
                 </h3>
             </Status>
 
             <Link to={'/'}>
-                <Button onClick={() => setSeatNumbers([])}>Voltar pra Home</Button>
+                <Button data-identifier="back-to-home-btn" onClick={() => setSeatNumbers([])}>Voltar pra Home</Button>
             </Link>
         </>
     )

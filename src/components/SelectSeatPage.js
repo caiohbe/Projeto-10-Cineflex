@@ -29,6 +29,7 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
 
                 return (
                     <Seat
+                        data-identifier="seat"
                         onClick={() => {selectSeat(s.id, s.isAvailable, s.name)}}
                         key={s.id} 
                         className={!s.isAvailable ? 'unavailable' : selectedSeats.includes(s.id) ? 'selected' :'available'}>{s.name}
@@ -40,7 +41,6 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
                 if (!isAvailable) {
                     alert('Esse assento não está disponível')
                 } else if (selectedSeats.includes(id)) {
-
                     setSelectedSeats(selectedSeats.filter((s) => {
                         if(s !== id) {
                             return s
@@ -69,9 +69,9 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
             </Seats>
 
             <Info>
-                <Seat className="selected"></Seat >
-                <Seat className="available"></Seat >
-                <Seat className="unavailable"></Seat >
+                <Seat data-identifier="seat-selected-subtitle" className="selected"></Seat >
+                <Seat data-identifier="seat-available-subtitle" className="available"></Seat >
+                <Seat data-identifier="seat-unavailable-subtitle" className="unavailable"></Seat >
             </Info>
             <Info>
                 <p>Selecionado</p>
@@ -81,9 +81,9 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
 
             <Inputs>
                 <p>Nome do comprador: </p>
-                <input onChange={(e) => setName(e.target.value)} placeholder='Digite seu nome...' type={'text'}></input>
+                <input data-identifier="buyer-name-input" onChange={(e) => setName(e.target.value)} placeholder='Digite seu nome...' type={'text'}></input>
                 <p>CPF do comprador: </p>
-                <input onChange={(e) => setCpf(e.target.value)} placeholder='Digite seu  CPF...' type={'text'}></input>
+                <input data-identifier="buyer-cpf-input" onChange={(e) => setCpf(e.target.value)} placeholder='Digite seu  CPF...' type={'text'}></input>
             </Inputs>
 
             <FinishOrder ids={selectedSeats} name={name} cpf={cpf}/>

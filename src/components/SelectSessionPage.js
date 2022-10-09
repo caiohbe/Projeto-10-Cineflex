@@ -21,7 +21,7 @@ export default function SelectSessionPage({title, setTitle, setSessionHour, setS
                 const hoursArray = e.showtimes.map((i) => {
                     return (
                         <Link to={`/assentos/${i.id}`} key={i.id}>
-                            <Hour onClick={() => {
+                            <Hour data-identifier="hour-minute-btn" onClick={() => {
                                 setSessionDay(e.date)
                                 setSessionHour(i.name)            
                             }}>{i.name}</Hour>
@@ -29,7 +29,7 @@ export default function SelectSessionPage({title, setTitle, setSessionHour, setS
                     )
                 })
                 return (
-                    <Session key={e.id}>
+                    <Session data-identifier="session-date" key={e.id}>
                         <p>{e.weekday} - {e.date}</p>
                         <Hours>
                             {hoursArray}

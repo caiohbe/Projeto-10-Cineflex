@@ -13,7 +13,7 @@ export default function SelectMoviePage() {
         .then((movies) => {
             setMoviesArray(movies.data.map((movie) => {
                 return (
-                    <MovieBanner key={movie.id} movie={movie}/>
+                    <MovieBanner data-identifier="movie-outdoor" key={movie.id} movie={movie}/>
                 )
             }))
         })
