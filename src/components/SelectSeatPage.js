@@ -50,7 +50,6 @@ export default function SelectSeatPage({name, setName, cpf, setCpf, seatNumbers,
                 } else if (!selectedSeats.includes(id) && isAvailable) {
                     setSelectedSeats([...selectedSeats, id])
                     setSeatNumbers([...seatNumbers, name])
-                    console.log(selectedSeats)
                 }
             }
 

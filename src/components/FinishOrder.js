@@ -10,8 +10,6 @@ export default function FinishOrder({ids, name, cpf}) {
     )
 
     function order(ids, name, cpf) {
-        console.log(ids,name,cpf)
-
         axios.
         post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
         {
